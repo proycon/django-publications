@@ -9,7 +9,13 @@
 	<a href="/publications/{{ author_escaped }}/" class="author">{{ author }}</a>{% if not forloop.last %}{% if forloop.revcounter == 2 %}{% if not forloop.first %},{% endif %} and {% else %}, {% endif %}{% endif %}
 	{% endfor %}<br />
 {% endif %}
+{% if publication.url %}
+<b><a href="{{ publication.url }}" class="title">{{ publication.title|tex_parse }}</a></b><br/>
+{% elif publication.pdf %}
+<b><a href="{{ MEDIA_URL }}{{ publication.pdf }}" class="title">{{ publication.title|tex_parse }}</a></b><br/>
+{% else %}
 <b><a href="/publications/{{ publication.pk }}/" class="title">{{ publication.title|tex_parse }}</a></b><br/>
+{% endif %}
 {% if publication.journal %}
 	<i>{{ publication.journal }}{% if publication.note %} ({{ publication.note }}){% endif %},
 	{% if publication.volume %}<b>{{ publication.volume }}</b>{% if publication.number %}({{ publication.number }}){% endif %},{% endif %}
