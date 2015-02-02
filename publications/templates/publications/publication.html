@@ -2,11 +2,11 @@
 
 {% if publication.authors_escaped|length > 8 %}
 	{% for author, author_escaped in publication.authors_escaped|slice:":8" %}
-	<a href="/publications/{{ author_escaped }}/" class="author">{{ author }}</a>,
+    <a href="{% url 'person' author_escaped %}" class="author">{{ author }}</a>,
 	{% endfor %} <i>et al.</i><br />
 {% else %}
 	{% for author, author_escaped in publication.authors_escaped %}
-	<a href="/publications/{{ author_escaped }}/" class="author">{{ author }}</a>{% if not forloop.last %}{% if forloop.revcounter == 2 %}{% if not forloop.first %},{% endif %} and {% else %}, {% endif %}{% endif %}
+	<a href="{% url 'person' author_escaped %}" class="author">{{ author }}</a>{% if not forloop.last %}{% if forloop.revcounter == 2 %}{% if not forloop.first %},{% endif %} and {% else %}, {% endif %}{% endif %}
 	{% endfor %}<br />
 {% endif %}
 {% if publication.url %}
@@ -14,7 +14,7 @@
 {% elif publication.pdf %}
 <b><a href="{{ MEDIA_URL }}{{ publication.pdf }}" class="title">{{ publication.title|tex_parse }}</a></b><br/>
 {% else %}
-<b><a href="/publications/{{ publication.pk }}/" class="title">{{ publication.title|tex_parse }}</a></b><br/>
+<b><a href="{% url 'publication' publication.pk %}/" class="title">{{ publication.title|tex_parse }}</a></b><br/>
 {% endif %}
 {% if publication.journal %}
 	<i>{{ publication.journal }}{% if publication.note %} ({{ publication.note }}){% endif %},
@@ -31,22 +31,22 @@
 {% endif %}
 {% if publication.keywords %}
 	{% for keyword, keyword_escaped in publication.keywords_escaped %}
-		<a class="keyword" href="/publications/tag/{{ keyword_escaped }}/">{{ keyword }}</a>
+    <a class="keyword" href="{% url 'keyword' keyword_escaped %}">{{ keyword }}</a>
 	{% endfor %}
 	<br />
 {% endif %}
 {% if publication.code %}<a class="link" href="{{ publication.code }}">Code</a>,{% endif %}
-{% if publication.url %}<a class="link" rel="external" href="{{ publication.url }}">URL</a>,{% endif %}
+{% if publication.url %}<a class="link" rel="external" href="{{ publication.url }}"><strong>Full text</strong> (external)</a>,{% endif %}
 {% if publication.doi %}<a class="link" rel="external" href="http://dx.doi.org/{{ publication.doi }}">DOI</a>,{% endif %}
 {% if not publication.journal and publication.isbn %}<a class="link" rel="external" href="http://isbndb.com/search/all?query={{ publication.isbn }}">ISBN</a>,{% endif %}
-{% if publication.pdf %}<a class="link" href="{{ MEDIA_URL }}{{ publication.pdf }}">PDF</a>,{% endif %}
+{% if publication.pdf %}<a class="link" href="{{ MEDIA_URL }}{{ publication.pdf }}"><strong>Full text</strong> (pdf)</a>,{% endif %}
 {% for file in publication.files %}
 	<a class="link" href="{{ MEDIA_URL }}{{ file.file }}">{{ file.description }}</a>,
 {% endfor %}
 {% for link in publication.links %}
 	<a class="link" rel="external" href="{{ link.url }}">{{ link.description }}</a>,
 {% endfor %}
-<a href="/publications/{{ publication.pk }}/?ris">RIS</a>,
-<a href="/publications/{{ publication.pk }}/?bibtex">BibTex</a>
+<a href="{% url 'publication' publication.pk %}/?ris">RIS</a>,
+<a href="{% url 'publication' publication.pk %}/?bibtex">BibTex</a>
 <abbr class="unapi-id" title="{{ publication.id }}"></abbr>
 <span class="Z3988" title="{{ publication.z3988 }}"></span>
