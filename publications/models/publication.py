@@ -158,7 +158,7 @@ class Publication(models.Model):
 				# don't try to abbreviate these
 				if j == 0 and name in prefixes:
 					continue
-				if j > 0 and name in prepositions:
+				if j > 0 and name.lower() in prepositions:
 					continue
 
 				if (len(name) > 2) or (len(name) and (name[-1] != '.')):
@@ -183,7 +183,7 @@ class Publication(models.Model):
 				# number of prepositions
 				num_prepositions = 0
 				for name in names:
-					if name in prepositions:
+					if name.lower() in prepositions:
 						num_prepositions += 1
 
 				# splitting point
