@@ -38,8 +38,8 @@ special_chars = (
 	(r'\ae', 'æ'), (r'\AE', 'Æ'), (r'\aa', 'å'), (r'\AA', 'Å'),(r'\o','ø'),(r'\O','Ø'),   #swedish, danish, norwegian
     (r'\c{c}','ç'),(r'\c{C}','Ç'), #french, portuguese, etc
 	(r'\~a', 'ã'), (r'\~A', 'Ã'), #portuguese
-	(r'\~o', 'õ'), (r'\~O', 'Õ'),
-	(r'{\i}', 'ı'),(r'\.{I}', 'İ'), (r'\u{g}','ğ'),(r'\u{G}','Ğ'),(r'\c{s}','ş'),(r'\c{S}','Ş') ) #turkish
+	(r'\~o', 'õ'), (r'\~O', 'Õ') )
+	#(r'{\i}', 'ı'),(r'\.{I}', 'İ'), (r'\u{g}','ğ'),(r'\u{G}','Ğ'),(r'\c{s}','ş'),(r'\c{S}','Ş') ) #turkish
 
 def parse(string):
 	"""
