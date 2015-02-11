@@ -14,5 +14,5 @@ urlpatterns = patterns('',
 	url(r'^tag/(?P<keyword>.+)/$', 'publications.views.keyword', name='keyword'),
 	url(r'^list/(?P<list>.+)/$', 'publications.views.list',name='list'),
 	url(r'^unapi/$', 'publications.views.unapi',name='unapi'),
-	url(r'^(?P<name>.+)/$', 'publications.views.person', name='person'),
+	url(r'^(?P<name>.+)/$', 'publications.views.person', name='author'),
 )
